@@ -39,9 +39,13 @@ public class MobileStore {
 		m3.setPrice(33000.00);
 		
 		System.out.printf("\n%-10s %-15s %-20s %-10s","Id","Brand","Owner","Price");
-		System.out.printf("\n%-10d %-15s %-20s %-10f",m1.getId(),m1.getBrand(),m1.getOwner(),m1.getPrice());
-		System.out.printf("\n%-10d %-15s %-20s %-10f",m2.getId(),m2.getBrand(),m2.getOwner(),m2.getPrice());
-		System.out.printf("\n%-10d %-15s %-20s %-10f",m3.getId(),m3.getBrand(),m3.getOwner(),m3.getPrice());
+		showMobile(m1);
+		showMobile(m2);
+		showMobile(m3);
+		
+	}
+	public static void showMobile(Mobile mb) {
+		System.out.printf("\n%-10d %-15s %-20s %-10f",mb.getId(),mb.getBrand(),mb.getOwner(),mb.getPrice());
 	}
 
 }
