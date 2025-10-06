@@ -38,14 +38,23 @@ public class MobileStore {
 		m3.setOwner("Sri Devi");
 		m3.setPrice(33000.00);
 		
+		Mobile m4 = new Mobile();
+		scanMobile(m4);
+		
 		System.out.printf("\n%-10s %-15s %-20s %-10s","Id","Brand","Owner","Price");
 		showMobile(m1);
 		showMobile(m2);
 		showMobile(m3);
-		
+		showMobile(m4);
 	}
 	public static void showMobile(Mobile mb) {
 		System.out.printf("\n%-10d %-15s %-20s %-10f",mb.getId(),mb.getBrand(),mb.getOwner(),mb.getPrice());
 	}
-
-}
+	
+	public static void scanMobile(Mobile mb) {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter Mobile Id:");mb.setId(scan.nextLong());scan.nextLine();
+		System.out.println("Enter Mobile Brand:");mb.setBrand(scan.nextLine());
+		System.out.println("Enter Mobile Owner:");mb.setOwner(scan.nextLine());
+		System.out.println("Enter Mobile Price:");mb.setPrice(scan.nextDouble());
+	}
