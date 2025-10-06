@@ -10,11 +10,54 @@ Create Workspace Folder (Desktop/John/JavaProjects)
 Start Eclipse and launch your Workspace Folder in it.
 
 public class Mobile {
-	public Long id;
-	public String brand;
-	public String owner;
-	public Double price;
+	private Long id;
+	private String brand;
+	private String owner;
+	private Double price;
+	
+	public Mobile() {
+		this.id=0L;
+		this.brand = "empty";
+		this.owner = "empty";
+		this.price = 0.00;
+	}
+	
+	public Mobile(Long id,String brand,String owner,Double price) {
+		this.id = id;
+		this.brand = brand;
+		this.owner = owner;
+		this.price = price;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getOwner() {
+		return owner;
+	}
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
+	
+	
 }
+
 
 
 public class MobileStore {
@@ -39,13 +82,21 @@ public class MobileStore {
 		m3.setPrice(33000.00);
 		
 		Mobile m4 = new Mobile();
-		scanMobile(m4);
+		//scanMobile(m4);
+		
+		Mobile m5 = new Mobile();
+		
+		Mobile m6 = new Mobile(2006L,"Poco","Kumar",28000.00);
+		Mobile m7 = new Mobile(2007L,"Lava","Latha",18000.00);
 		
 		System.out.printf("\n%-10s %-15s %-20s %-10s","Id","Brand","Owner","Price");
 		showMobile(m1);
 		showMobile(m2);
 		showMobile(m3);
 		showMobile(m4);
+		showMobile(m5);
+		showMobile(m6);
+		showMobile(m7);
 	}
 	public static void showMobile(Mobile mb) {
 		System.out.printf("\n%-10d %-15s %-20s %-10f",mb.getId(),mb.getBrand(),mb.getOwner(),mb.getPrice());
