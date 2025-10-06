@@ -1,4 +1,10 @@
-Install Java (https://www.oracle.com/in/java/)
+Check Java Version
+  Open Command Prompt
+  java --version
+  Check the version should be more than 17. if not Install Java (https://www.oracle.com/in/java/)
+
 Install Eclipse EE (https://www.eclipse.org/downloads/packages/installer)
+  Select EE version Installer Exe. Download the Exe and install it.
+
 Create Workspace Folder (Desktop/John/JavaProjects)
 Start Eclipse and launch your Workspace Folder in it.
