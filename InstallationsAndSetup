@@ -58,3 +58,5 @@ public class MobileStore {
 		System.out.println("Enter Mobile Owner:");mb.setOwner(scan.nextLine());
 		System.out.println("Enter Mobile Price:");mb.setPrice(scan.nextDouble());
 	}
+
+}
