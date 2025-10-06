@@ -8,3 +8,32 @@ Install Eclipse EE (https://www.eclipse.org/downloads/packages/installer)
 
 Create Workspace Folder (Desktop/John/JavaProjects)
 Start Eclipse and launch your Workspace Folder in it.
+
+public class Mobile {
+	public Long id;
+	public String brand;
+	public String owner;
+	public Double price;
+}
+
+
+public class MobileStore {
+
+	public static void main(String[] args) {
+		Mobile m1 = new Mobile();
+		m1.id = 2001L;
+		m1.brand = "Samsung";
+		m1.owner = "John";
+		m1.price = 43000.00;
+		
+		Mobile m2 = new Mobile();
+		m2.id = 2002L;
+		m2.brand = "Apple";
+		m2.owner = "Prakash";
+		m2.price = 73000.00;
+		
+		System.out.println(m1.id + " -- " + m1.brand + " -- " + m1.owner + " -- " + m1.price );
+		System.out.println(m2.id + " -- " + m2.brand + " -- " + m2.owner + " -- " + m2.price );
+	}
+
+}
