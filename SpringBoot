@@ -1,0 +1,108 @@
+CRUD Operations using Spring Boot
+
+Install JDK (Java Development Kit). Java version should be above 17.
+Install MySQL (Install Community version).
+Install Postman Application.
+
+Create your Workspace folder
+	D drive
+	create folder by your name
+	under your name folder create folder SpringBootProjects
+	D:/John/SpringBootProjects
+
+Create Spring Boot Project
+	Open chrome browser and go the following website.
+	https://start.spring.io/
+		Project - Maven
+		Language - Java
+		Spring Boot - 3.4.5
+		Project Metadata
+		Group - edu.mce.john
+		Artifact - student
+		Name - 
+		Description -
+		Package name - edu.mce.john.student
+		Packaging - Jar
+		Java - 17
+	Dependencies
+		click Add Dependencies
+		enter Spring Web
+		select the first one.
+		click Generate
+	This will generate a project zip file in your sstem downloads folder.
+
+Extract Project zip folder to your workspace folder
+	Go to your downloads folder (open folder explorer, left hand side 'downloads' folder will be there).
+	Project zip file named student.zip will be there. Right click. click 'Extract all ...'
+	click 'browse' button. go to 'SpringBootProjects' folder under your name folder (created early). 
+	dont open the 'SpringBootProjects' folder. just select that folder. click 'Select Folder' button.
+	click extract.
+	'student' folder will be created under your 'SpringBootProjects' folder.
+
+Open your Workspace folder in Eclipse
+	Open Eclipse
+	File -> Switch Workspace
+	check your SpringBootProjects folder is selected. if not browse and select that folder.
+	click 'Launch'
+
+Open student project in eclipse
+	File -> Open Projects from File System...
+	click 'Directory' button.
+	go to your 'SpringBootProjects' folder. 
+	select 'student' folder. dont open it. click select folder.
+	click finish.
+
+Hello World Program in Console. 
+	Expand src/main/java/
+	Expand the base package edu.mse.john.student
+	StudentApplication.java - open by double click
+	Next to the line SpringApplication.run(StudentApplication.class, args);
+	type System.out.println("Hello World");
+	save file.
+	Run -> Run As -> Java Application
+	Click on Terminate button (red color button) in the console.
+	
+
+Create 4 packages - repositories, services, controllers and models 
+	Right click on base package edu.mce.john.student
+	New -> Package -> Name: edu.mce.john.student.repositories -> Finish
+	Right click on base package edu.mce.john.student
+	New -> Package -> Name: edu.mce.john.student.services -> Finish
+	Right click on base package edu.mce.john.student
+	New -> Package -> Name: edu.mce.john.student.controllers -> Finish
+	Right click on base package edu.mce.john.student
+	New -> Package -> Name: edu.mce.john.student.models -> Finish
+	
+	
+Create Classes and interfaces in repositories, services, controllers and models packages
+	Right click on repositories package
+	New -> Class -> Name: StudentListRepository -> Finish
+	Right click on repositories package
+	New -> Interface -> Name: StudentCRUD -> Finish
+	Right click on services package
+	New -> Class -> Name: StudentService -> Finish
+	Right click on controllers package
+	New -> Class -> Name: StudentBrowserController -> Finish
+	Right click on controllers package
+	New -> Class -> Name: StudentRESTController -> Finish
+	Right click on models package
+	New -> Class -> Name: Student -> Finish
+	Right click on models package
+	New -> Class -> Name: StudentDto -> Finish
+	
+Create html files under src/main/resources/templates/student folder
+	Right click on templates folder -> New -> Folder -> Folder name: student -> Finish.
+	Right click on student folder -> New -> File -> File name: homePage.html -> Finish
+	Right click on student folder -> New -> File -> File name: studentList.html -> Finish
+	Right click on student folder -> New -> File -> File name: studentDetail.html -> Finish	
+	
+Fill those 3 html files with
+	<!doctype html>
+	<html>
+		<head>
+			<title>Student CRUD</title>
+		</head>
+		<body>
+			
+		</body>
+	</html>
