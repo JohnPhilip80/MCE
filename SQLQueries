@@ -3,29 +3,29 @@ use john_student;
 CREATE TABLE course (
   course_id BIGINT PRIMARY KEY AUTO_INCREMENT,
   course_name VARCHAR(10),
-  course_description VARCHAR(40),
+  course_description VARCHAR(80),
   course_duration INT,
   course_fee DECIMAL(10,2)
 );
 
 
 CREATE TABLE student(
-  student_id BITINT PRIMARY KEY AUTO_INCREMENT,
-  student_name VARCHAR(40),
-  student_email VARCHAR(45),
+  student_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  student_name VARCHAR(80),
+  student_email VARCHAR(85),
   student_phone BITINT,
   course_id BIGINT,
   FOREIGN KEY (course_id) REFERENCES course(course_id)
 );
 
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('CSE','CSE',4,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('MCA','CSE',4,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('ECE','CSE',4,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('EEE','CSE',4,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('IT','CSE',4,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('CIVIL','CSE',4,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('MECH','CSE',4,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('EIE','CSE',4,80000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('CSE','Computer Science Engineering',4,80000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('MCA','Master of Computer Applications',6,80000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('ECE','Electornics Communications Engineering',7,80000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('EEE','Electrical and Electronics Engineering',5,80000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('IT','Information Technology',9,80000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('CIVIL','Civil Engineering',3,80000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('MECH','Mechanical Engineering',7,80000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('EIE','Electronics and Instrumentation Engineering',8,80000);
 
 
 
