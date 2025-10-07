@@ -13,7 +13,7 @@ CREATE TABLE student(
   student_id BIGINT PRIMARY KEY AUTO_INCREMENT,
   student_name VARCHAR(80),
   student_email VARCHAR(85),
-  student_phone BITINT,
+  student_phone BIGINT,
   course_id BIGINT,
   FOREIGN KEY (course_id) REFERENCES course(course_id)
 );
