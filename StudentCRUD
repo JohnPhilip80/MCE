@@ -1,0 +1,14 @@
+package edu.mce.john.student.repositories;
+
+import java.util.List;
+
+import edu.mce.john.student.models.Student;
+
+public interface StudentCRUD {
+	List<Student> readStudents();
+	void createStudent(Student st);
+	void updateStudent(Student st);
+	void deleteStudent(Long id);
+	Student readStudent(Long id);
+	
+}
