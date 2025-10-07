@@ -82,13 +82,9 @@ Create Classes and interfaces in repositories, services, controllers and models 
 	Right click on services package
 	New -> Class -> Name: StudentService -> Finish
 	Right click on controllers package
-	New -> Class -> Name: StudentBrowserController -> Finish
-	Right click on controllers package
-	New -> Class -> Name: StudentRESTController -> Finish
+	New -> Class -> Name: StudentController -> Finish
 	Right click on models package
 	New -> Class -> Name: Student -> Finish
-	Right click on models package
-	New -> Class -> Name: StudentDto -> Finish
 	
 Create html files under src/main/resources/templates/student folder
 	Right click on templates folder -> New -> Folder -> Folder name: student -> Finish.
