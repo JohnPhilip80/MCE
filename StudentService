@@ -1,0 +1,17 @@
+package edu.mce.john.student.services;
+
+import java.util.List;
+
+import edu.mce.john.student.models.Student;
+import edu.mce.john.student.repositories.StudentRepository;
+
+public class StudentService {
+	private StudentRepository repo;
+	public StudentService() {
+		repo = new StudentRepository();
+	}
+	
+	public List<Student> readStudents(){
+		return repo.readStudents();
+	}
+}
