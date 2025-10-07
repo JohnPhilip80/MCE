@@ -19,13 +19,13 @@ CREATE TABLE student(
 );
 
 INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('CSE','Computer Science Engineering',4,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('MCA','Master of Computer Applications',6,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('ECE','Electornics Communications Engineering',7,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('EEE','Electrical and Electronics Engineering',5,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('IT','Information Technology',9,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('CIVIL','Civil Engineering',3,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('MECH','Mechanical Engineering',7,80000);
-INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('EIE','Electronics and Instrumentation Engineering',8,80000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('MCA','Master of Computer Applications',2,90000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('ECE','Electornics Communications Engineering',4,60000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('EEE','Electrical and Electronics Engineering',4,40000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('IT','Information Technology',4,65000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('CIVIL','Civil Engineering',4,52000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('MECH','Mechanical Engineering',4,71000);
+INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('EIE','Electronics and Instrumentation Engineering',4,48000);
 
 
 
