@@ -1,0 +1,53 @@
+package edu.mce.john.student.repositories;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.mce.john.student.models.Student;
+
+public class StudentRepository implements StudentCRUD {
+	
+	private List<Student> students;
+	
+	public StudentRepository() {
+		students = new ArrayList();
+		students.add(new Student(2001L,"John","CSE",8.9));
+		students.add(new Student(2002L,"Sri Lakshmi","MCA",8.6));
+		students.add(new Student(2003L,"Siva","ECE",7.9));
+		students.add(new Student(2004L,"Meena","EEE",7.8));
+		students.add(new Student(2005L,"Latha","MECH",8.2));
+		students.add(new Student(2006L,"Prakash","CIVIL",7.9));
+		students.add(new Student(2007L,"Swetha","EIE",8.5));
+		
+	}
+	
+	@Override
+	public List<Student> readStudents() {
+		return this.students;
+	}
+
+	@Override
+	public void createStudent(Student st) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateStudent(Student st) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteStudent(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Student readStudent(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}
