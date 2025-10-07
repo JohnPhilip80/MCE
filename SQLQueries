@@ -1,25 +1,22 @@
 use john_student;
 
-CREATE TABLE `course` (
-  `course_id` bigint NOT NULL AUTO_INCREMENT,
-  `course_description` varchar(40) DEFAULT NULL,
-  `course_duration` int DEFAULT NULL,
-  `course_fee` decimal(10,2) DEFAULT NULL,
-  `course_name` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE course (
+  course_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  course_name VARCHAR(10),
+  course_description VARCHAR(40),
+  course_duration INT,
+  course_fee DECIMAL(10,2)
+);
 
 
-CREATE TABLE `student` (
-  `student_id` bigint NOT NULL AUTO_INCREMENT,
-  `student_email` varchar(45) DEFAULT NULL,
-  `student_name` varchar(40) NOT NULL,
-  `student_phone` bigint DEFAULT NULL,
-  `course_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`student_id`),
-  KEY `FKdfypyqt0stgfc0aij9kcxm99s` (`course_id`),
-  CONSTRAINT `FKdfypyqt0stgfc0aij9kcxm99s` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=398 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE student(
+  student_id BITINT PRIMARY KEY AUTO_INCREMENT,
+  student_name VARCHAR(40),
+  student_email VARCHAR(45),
+  student_phone BITINT,
+  course_id BIGINT,
+  FOREIGN KEY (course_id) REFERENCES course(course_id)
+);
 
 INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('CSE','CSE',4,80000);
 INSERT INTO course(course_name,course_description,course_duration,course_fee) VALUES ('MCA','CSE',4,80000);
