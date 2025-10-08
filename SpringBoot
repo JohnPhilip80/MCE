@@ -85,4 +85,7 @@ Create Classes and interfaces in repositories, services, controllers and models 
 	New -> Class -> Name: StudentController -> Finish
 	Right click on models package
 	New -> Class -> Name: Student -> Finish
-	
+
+Install Postman App.
+	https://www.postman.com/downloads/
+
