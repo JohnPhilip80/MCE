@@ -58,7 +58,7 @@ Open studentdb project in eclipse
 
 Hello World Program in Console. 
 	Expand src/main/java/
-	Expand the base package edu.mse.john.student
+	Expand the base package edu.mse.john.studentdb
 	StudentdbApplication.java - open by double click
 	Next to the line SpringApplication.run(StudentApplication.class, args);
 	type System.out.println("Hello World");
@@ -67,7 +67,7 @@ Hello World Program in Console.
 	Click on Terminate button (red color button) in the console.
 	
 
-Create 4 packages - repositories, services, controllers and models 
+Create 4 packages - repositories, services, controllers and entities 
 	Right click on base package edu.mce.john.studentdb
 	New -> Package -> Name: edu.mce.john.studentdb.repositories -> Finish
 	Right click on base package edu.mce.john.studentdb
