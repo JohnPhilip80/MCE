@@ -151,4 +151,6 @@ UPDATE student SET student_phone = 98989898, student_course='MCA' WHERE student_
 
 SELECT * FROM student;
 
+DELETE  FROM student where student_id > 5;
 
+SELECT * FROM student;
