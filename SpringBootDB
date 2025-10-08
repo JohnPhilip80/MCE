@@ -1,0 +1,126 @@
+CRUD Operations using Spring Boot with Database
+
+
+Install MySQL (Install Community version) or Use H2 Database
+Install Postman Application
+
+Create your Workspace folder
+	D drive
+	create folder by your name
+	under your name folder create folder SpringBootProjects
+	D:/John/SpringBootProjects
+
+Create Spring Boot Project
+	Open chrome browser and go the following website.
+	https://start.spring.io/
+		Project - Maven
+		Language - Java
+		Spring Boot - 3.4.5
+		Project Metadata
+		Group - edu.mce.john
+		Artifact - studentdb
+		Name - 
+		Description -
+		Package name - edu.mce.john.studentdb
+		Packaging - Jar
+		Java - 17
+	Dependencies
+		click Add Dependencies
+		enter Spring Web
+		select the first one.
+    enter jpa
+    select the first one.
+    enter h2
+    select the first one.
+		click Generate
+	This will generate a project zip file in your system downloads folder.
+
+Extract Project zip folder to your workspace folder
+	Go to your downloads folder (open folder explorer, left hand side 'downloads' folder will be there).
+	Project zip file named studentdb.zip will be there. Right click. click 'Extract all ...'
+	click 'browse' button. go to 'SpringBootProjects' folder under your name folder (created early). 
+	dont open the 'SpringBootProjects' folder. just select that folder. click 'Select Folder' button.
+	click extract.
+	'studentdb' folder will be created under your 'SpringBootProjects' folder.
+
+Open your Workspace folder in Eclipse
+	Open Eclipse
+	File -> Switch Workspace
+	check your SpringBootProjects folder is selected. if not browse and select that folder.
+	click 'Launch'
+
+Open studentdb project in eclipse
+	File -> Open Projects from File System...
+	click 'Directory' button.
+	go to your 'SpringBootProjects' folder. 
+	select 'studentdb' folder. dont open it. click select folder.
+	click finish.
+
+Hello World Program in Console. 
+	Expand src/main/java/
+	Expand the base package edu.mse.john.student
+	StudentdbApplication.java - open by double click
+	Next to the line SpringApplication.run(StudentApplication.class, args);
+	type System.out.println("Hello World");
+	save file.
+	Run -> Run As -> Java Application
+	Click on Terminate button (red color button) in the console.
+	
+
+Create 4 packages - repositories, services, controllers and models 
+	Right click on base package edu.mce.john.studentdb
+	New -> Package -> Name: edu.mce.john.studentdb.repositories -> Finish
+	Right click on base package edu.mce.john.studentdb
+	New -> Package -> Name: edu.mce.john.studentdb.services -> Finish
+	Right click on base package edu.mce.john.studentdb
+	New -> Package -> Name: edu.mce.john.studentdb.controllers -> Finish
+	Right click on base package edu.mce.john.studentdb
+	New -> Package -> Name: edu.mce.john.studentdb.models -> Finish
+	
+	
+Create Classes and interfaces in repositories, services, controllers and models packages
+	Right click on repositories package
+	New -> Class -> Name: StudentRepository -> Finish
+	Right click on repositories package
+	New -> Interface -> Name: StudentCRUD -> Finish
+	Right click on services package
+	New -> Class -> Name: StudentService -> Finish
+	Right click on controllers package
+	New -> Class -> Name: StudentController -> Finish
+	Right click on models package
+	New -> Class -> Name: Student -> Finish
+
+Install Postman App.
+	https://www.postman.com/downloads/
+
+src/main/resources/application.properties file
+
+##
+server.port = 8090
+# ## In memory store: not persistent
+# spring.datasource.url=jdbc:h2:mem:app_db;DB_CLOSE_ON_EXIT=FALSE
+
+# ## Local db filestore: in your home folder
+# spring.datasource.url=jdbc:h2:file:~/h2db/h2_db_example/app_db;DB_CLOSE_ON_EXIT=FALSE
+
+# ## Local db filestore: in base directory in folder "data"
+spring.datasource.url=jdbc:h2:file:./data/app_db;DB_CLOSE_ON_EXIT=FALSE
+
+# h2 defaults:
+spring.datasource.username=sa
+spring.datasource.password=pass
+
+spring.datasource.driverClassName=org.h2.Driver
+
+# Use "create" or "create-drop" when you wish to recreate database on restart; use 
+# "update" or "validate" when data is to be kept.
+spring.jpa.hibernate.ddl-auto=update
+
+# 
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+
