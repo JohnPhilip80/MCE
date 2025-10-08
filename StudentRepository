@@ -57,7 +57,7 @@ public class StudentRepository implements StudentCRUD {
 	public Student readStudent(Long id) {
 		int index =0;
 		for(int i=0;i<students.size();i++) {
-			if(students.get(i).getStudentId() == id) {
+			if(students.get(i).getStudentId().equals(id)) {
 				index = i;
 			}
 		}
