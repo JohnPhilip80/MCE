@@ -80,7 +80,7 @@ Create 4 packages - repositories, services, controllers and entities
 	
 Create Classes and interfaces in repositories, services, controllers and entities packages
 	Right click on repositories package
-	New -> Class -> Name: StudentRepository -> Finish
+	New -> Interface -> Name: StudentRepository -> Finish
 	Right click on repositories package
 	New -> Interface -> Name: StudentCRUD -> Finish
 	Right click on services package
