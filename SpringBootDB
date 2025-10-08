@@ -154,3 +154,188 @@ SELECT * FROM student;
 DELETE  FROM student where student_id > 5;
 
 SELECT * FROM student;
+
+
+package edu.mce.john.studentdb.entities;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="student")
+public class Student {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "student_id")
+	private Long studentId;
+	@Column(name = "student_name", length=60)
+	private String studentName;
+	@Column(name = "student_email", length=70)
+	private String studentEmail;
+	@Column(name = "student_phone")
+	private Long studentPhone;
+	@Column(name = "student_course", length=10)
+	private String studentCourse;
+	@Column(name = "student_cgpa", length=60)
+	private Double studentCGPA;
+	public Student(String studentName, String studentEmail, Long studentPhone, String studentCourse,
+			Double studentCGPA) {
+		super();
+		this.studentName = studentName;
+		this.studentEmail = studentEmail;
+		this.studentPhone = studentPhone;
+		this.studentCourse = studentCourse;
+		this.studentCGPA = studentCGPA;
+	}
+	public Student(Long studentId, String studentName, String studentEmail, Long studentPhone, String studentCourse,
+			Double studentCGPA) {
+		super();
+		this.studentId = studentId;
+		this.studentName = studentName;
+		this.studentEmail = studentEmail;
+		this.studentPhone = studentPhone;
+		this.studentCourse = studentCourse;
+		this.studentCGPA = studentCGPA;
+	}
+	public Student() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Long getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
+	}
+	public String getStudentName() {
+		return studentName;
+	}
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+	public String getStudentEmail() {
+		return studentEmail;
+	}
+	public void setStudentEmail(String studentEmail) {
+		this.studentEmail = studentEmail;
+	}
+	public Long getStudentPhone() {
+		return studentPhone;
+	}
+	public void setStudentPhone(Long studentPhone) {
+		this.studentPhone = studentPhone;
+	}
+	public String getStudentCourse() {
+		return studentCourse;
+	}
+	public void setStudentCourse(String studentCourse) {
+		this.studentCourse = studentCourse;
+	}
+	public Double getStudentCGPA() {
+		return studentCGPA;
+	}
+	public void setStudentCGPA(Double studentCGPA) {
+		this.studentCGPA = studentCGPA;
+	}
+}
+
+
+package edu.mce.john.studentdb.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import edu.mce.john.studentdb.entities.Student;
+
+@Repository
+public interface StudentRepository extends JpaRepository<Student,Long> {
+	Student getStudentByStudentId(Long id);
+}
+
+
+
+package edu.mce.john.studentdb.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import edu.mce.john.studentdb.entities.Student;
+import edu.mce.john.studentdb.repositories.StudentRepository;
+
+@Service
+public class StudentService {
+	@Autowired
+	private StudentRepository repo;
+	
+	public List<Student> readBooks(){
+		return repo.findAll();
+	}
+	public void createStudent(Student st) {
+		repo.save(st);
+	}
+	public void updateStudent(Student st) {
+		repo.save(st);
+	}
+	public void deleteStudent(Long id) {
+		repo.deleteById(id);
+	}
+	public Student getStudentByStudentId(Long id) {
+		return repo.getStudentByStudentId(id);
+	}
+}
+
+
+package edu.mce.john.studentdb.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import edu.mce.john.studentdb.entities.Student;
+import edu.mce.john.studentdb.services.StudentService;
+
+@RestController
+@RequestMapping("/student/api")
+public class StudentController {
+	@Autowired
+	private StudentService service;
+	
+	@GetMapping("/readstudents")
+	public List<Student> readBooks() {
+		return service.readBooks();
+	}
+	@PostMapping("/createstudent")
+	public String createStudent(@RequestBody Student st) {
+		service.createStudent(st);
+		return "Student Created Successfully";
+	}
+	@PutMapping("/updatestudent")
+	public String updateStudent(@RequestBody Student st) {
+		service.updateStudent(st);
+		return "Student Updated Successfully";
+	}
+	@DeleteMapping("/deletestudent")
+	public String deleteStudent(@RequestParam Long id) {
+		service.deleteStudent(id);
+		return "Student Deleted Successfully";
+	}
+	@GetMapping("/readstudent")
+	public Student readBook(@RequestParam Long id) {
+		return service.getStudentByStudentId(id);
+	}
+}
+
