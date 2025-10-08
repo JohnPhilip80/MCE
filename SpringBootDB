@@ -134,3 +134,14 @@ student_cgpa DECIMAL(5,2));
 
 DROP TABLE student;
 
+INSERT INTO student (student_name,student_email,student_phone,
+student_course,student_cgpa) VALUES ('Aruna','aruna@gmail.com','123456',
+'ECE',8.2);
+
+INSERT INTO student (student_name,student_email,student_phone,
+student_course,student_cgpa) VALUES ('Siva','siva@gmail.com','123456',
+'EEE',7.9);
+
+INSERT INTO student (student_name,student_email,student_phone,
+student_course,student_cgpa) VALUES ('Keerthi','keerthi@gmail.com','123456',
+'MCA',9.5);
