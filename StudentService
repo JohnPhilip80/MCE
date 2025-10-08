@@ -14,4 +14,13 @@ public class StudentService {
 	public List<Student> readStudents(){
 		return repo.readStudents();
 	}
+	public void createStudent(Student st) {
+		repo.createStudent(st);
+	}
+	public void updateStudent(Student st) {
+		repo.updateStudent(st);
+	}
+	public void deleteStudent(Long id) {
+		repo.deleteStudent(id);
+	}
 }
