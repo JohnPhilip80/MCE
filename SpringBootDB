@@ -75,10 +75,10 @@ Create 4 packages - repositories, services, controllers and entities
 	Right click on base package edu.mce.john.studentdb
 	New -> Package -> Name: edu.mce.john.studentdb.controllers -> Finish
 	Right click on base package edu.mce.john.studentdb
-	New -> Package -> Name: edu.mce.john.studentdb.models -> Finish
+	New -> Package -> Name: edu.mce.john.studentdb.entities -> Finish
 	
 	
-Create Classes and interfaces in repositories, services, controllers and models packages
+Create Classes and interfaces in repositories, services, controllers and entities packages
 	Right click on repositories package
 	New -> Class -> Name: StudentRepository -> Finish
 	Right click on repositories package
@@ -87,7 +87,7 @@ Create Classes and interfaces in repositories, services, controllers and models 
 	New -> Class -> Name: StudentService -> Finish
 	Right click on controllers package
 	New -> Class -> Name: StudentController -> Finish
-	Right click on models package
+	Right click on entities package
 	New -> Class -> Name: Student -> Finish
 
 Install Postman App.
