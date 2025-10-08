@@ -124,3 +124,13 @@ spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
 
 
+CREATE TABLE student(
+student_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+student_name VARCHAR(80),
+student_email VARCHAR(90),
+student_phone BIGINT,
+student_course VARCHAR(10),
+student_cgpa DECIMAL(5,2));
+
+DROP TABLE student;
+
