@@ -28,20 +28,29 @@ public class StudentRepository implements StudentCRUD {
 
 	@Override
 	public void createStudent(Student st) {
-		// TODO Auto-generated method stub
-		
+		this.students.add(st);
 	}
 
 	@Override
 	public void updateStudent(Student st) {
-		// TODO Auto-generated method stub
-		
+		int index =0;
+		for(int i=0;i<students.size();i++) {
+			if(students.get(i).getStudentId() == st.getStudentId()) {
+				index = i;
+			}
+		}
+		students.set(index, st);
 	}
 
 	@Override
 	public void deleteStudent(Long id) {
-		// TODO Auto-generated method stub
-		
+		int index =0;
+		for(int i=0;i<students.size();i++) {
+			if(students.get(i).getStudentId() == id) {
+				index = i;
+			}
+		}
+		students.remove(index);
 	}
 
 	@Override
