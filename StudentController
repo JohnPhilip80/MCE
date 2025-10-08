@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.mce.john.student.models.Student;
@@ -41,7 +42,7 @@ public class StudentController {
 		return "Student Deleted Successfully";
 	}
 	@GetMapping("/readstudent")
-	public Student readStudent(@RequestBody Long id) {
+	public Student readStudent(@RequestParam Long id) {
 		return service.readStudent(id);
 	}
 }
