@@ -37,7 +37,7 @@ public class StudentController {
 		return "Student Updated Successfully";
 	}
 	@DeleteMapping("/deletestudent")
-	public String deleteStudent(@RequestBody Long id) {
+	public String deleteStudent(@RequestParam Long id) {
 		service.deleteStudent(id);
 		return "Student Deleted Successfully";
 	}
