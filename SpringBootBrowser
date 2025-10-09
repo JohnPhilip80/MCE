@@ -160,6 +160,121 @@ Update home-page.html with bootstrap navigation bar with links.
 Create aboutus-page.html, contactus-page.html, createstudent-page.html, login-page.html, readstudent-page.html, readstudents-page.html, register-page.html files under templates folder.
 Copy the content from home-page.html and paste in all other html files. Modify the div tag content.
 
+StudentBrowserController.java
+	package edu.mce.john.studentdb.controllers;
+	import java.util.List;
+	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.stereotype.Controller;
+	import org.springframework.ui.Model;
+	import org.springframework.web.bind.annotation.GetMapping;
+	import org.springframework.web.bind.annotation.RequestMapping;
+	import edu.mce.john.studentdb.entities.Student;
+	import edu.mce.john.studentdb.services.StudentService;
+	
+	@Controller
+	@RequestMapping("/student/ui")
+	public class StudentBrowserController {
+		@Autowired
+		private StudentService service;
+		
+		@GetMapping({"","/","homepage"})
+		public String homePage() {
+			return "/student/home-page.html";
+		}
+		@GetMapping("aboutuspage")
+		public String aboutUsPage() {
+			return "/student/aboutus-page.html";
+		}
+		@GetMapping("contactuspage")
+		public String contactUsPage() {
+			return "/student/contactus-page.html";
+		}
+		@GetMapping("loginpage")
+		public String loginPage() {
+			return "/student/login-page.html";
+		}
+		@GetMapping("registerpage")
+		public String registerPage() {
+			return "/student/register-page.html";
+		}
+		@GetMapping("readstudentspage")
+		public String readStudentsPage(Model model) {
+			List<Student> students = service.readStudents();
+			System.out.println(students.get(0).getStudentId());
+			model.addAttribute("students",students);
+			return "/student/readstudents-page.html";
+		}
+		@GetMapping("createstudentpage")
+		public String createStudentPage() {
+			return "/student/createstudent-page.html";
+		}
+	}
+
+readstudents-page.html	
+	<html lang="en" xmlns:th="http://www.thymeleaf.org">
+		<head>
+		<title>MCE Students</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+			crossorigin="anonymous">
+		<link rel="stylesheet" th:href="@{/styles.css}">
+		</head>
+		<body>
+			<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a href="/student/ui/homepage" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="/student/ui/readstudentspage" class="nav-link">Read Students</a></li>
+					<li class="nav-item"><a href="/student/ui/createstudentpage" class="nav-link">Create Student</a></li>
+				</ul>
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item"><a href="/student/ui/loginpage" class="nav-link">Login</a></li>
+					<li class="nav-item"><a href="/student/ui/registerpage" class="nav-link">Register</a></li>
+					<li class="nav-item"><a href="/student/ui/aboutuspage" class="nav-link">About Us</a></li>
+					<li class="nav-item"><a href="/student/ui/contactuspage" class="nav-link">Contact Us</a></li>
+				</ul>
+			</nav>
+		
+			<div class="container">
+				<h1 class="text-center">Student List</h1>
+				<table class = "table table-striped">
+				    <thead>
+				        <tr>
+				        	<th> Id</th>
+				            <th> Name</th>
+				            <th> Email </th>
+				            <th> Phone </th>
+				            <th> Course </th>
+				            <th> CGPA </th>
+				            <th> Actions </th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr th:each="st:${students}">
+							<td th:text="${st.studentId}"></td>
+							<td th:text="${st.studentName}"></td>
+							<td th:text="${st.studentEmail}"></td>
+							<td th:text="${st.studentPhone}"></td>
+							<td th:text="${st.studentCourse}"></td>
+							<td th:text="${st.studentCGPA}"></td>
+							<td>
+								<a href="#" class = "btn btn-info">Update</a>
+								<a href="#" class = "btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+								<a href="#" class = "btn btn-info">View</a>
+							</td>
+						</tr>
+				    </tbody>
+				</table>				
+			</div>
+			<footer class="footer">
+				<div class="container">
+					<span>All Rights Reserved 2025 John Philip</span>
+				</div>
+			</footer>
+		</body>
+		</html>
+
 Create package edu.mce.john.studentdb.dto
 Create class StudentDto under dto package.
 	package edu.mce.john.studentdb.dto;
