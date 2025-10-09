@@ -273,7 +273,7 @@ public class StudentService {
 	@Autowired
 	private StudentRepository repo;
 	
-	public List<Student> readBooks(){
+	public List<Student> readStudents(){
 		return repo.findAll();
 	}
 	public void createStudent(Student st) {
