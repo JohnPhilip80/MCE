@@ -180,7 +180,7 @@ public class Student {
 	private Long studentPhone;
 	@Column(name = "student_course", length=10)
 	private String studentCourse;
-	@Column(name = "student_cgpa", length=60)
+	@Column(name = "student_cgpa")
 	private Double studentCGPA;
 	public Student(String studentName, String studentEmail, Long studentPhone, String studentCourse,
 			Double studentCGPA) {
