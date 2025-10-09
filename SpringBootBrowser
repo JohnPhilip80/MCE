@@ -1,1 +1,162 @@
-test
+Include the Thymeleaf Dependency in pom.xml file.
+  <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+	</dependency>
+
+create 'student' folder under src/main/resources/templates.
+create 'home-page.html' file under templates folder.
+<html>
+  <head>
+    <title>MCE Students</title>
+  </head>
+  <body>
+    <h1>Welcome to MCE</h1>
+  </body>
+</html>
+
+create StudentBrowserController class in edu.mce.john.studentdb.controllers package.
+package edu.mce.john.studentdb.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/student/ui")
+public class StudentBrowserController {
+	@GetMapping({"","/","homepage"})
+	public String homePage() {
+		return "/student/home-page.html";
+	}
+}
+Run and test in browser with the url http://localhost:8090/student/ui
+
+Include Bootstrap
+https://getbootstrap.com/
+Include via CDN
+Click the copy link.
+Paste in home-page.html
+  <html>
+    <head>
+      <title>MCE Students</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    </head>
+    <div class="container">
+		  <h1 class="text-center">Welcome to MCE</h1>
+	  </div>
+  </html>
+
+Run and test in browser.
+
+Include our own style
+Create styles.css file under src/main/resources/static folder
+  .footer{
+      position: absolute;
+      bottom:0;
+      width:100%;
+      height:40px;
+      background-color: blue;
+      text-align: center;
+      color:white;
+  }
+Include styles.css in home-page.html
+  <html>
+    <head>
+      <title>MCE Students</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+      <link rel="stylesheet" th:href="@{/styles.css}">
+    </head>
+    <div class="container">
+		  <h1 class="text-center">Welcome to MCE</h1>
+	  </div>
+    	<footer class="footer">
+    		<div class="container">
+    			<span>All Rights Reserved 2025 John Philip</span>
+    		</div>
+    	</footer>
+  </html>
+Run and Test in browser.
+
+Update StudentBrowserController
+  package edu.mce.john.studentdb.controllers;
+  import org.springframework.stereotype.Controller;
+  import org.springframework.web.bind.annotation.GetMapping;
+  import org.springframework.web.bind.annotation.RequestMapping;
+  
+  @Controller
+  @RequestMapping("/student/ui")
+  public class StudentBrowserController {
+  	@GetMapping({"","/","homepage"})
+  	public String homePage() {
+  		return "/student/home-page.html";
+  	}
+  	@GetMapping("aboutuspage")
+  	public String aboutUsPage() {
+  		return "/student/aboutus-page.html";
+  	}
+  	@GetMapping("contactuspage")
+  	public String contactUsPage() {
+  		return "/student/contactus-page.html";
+  	}
+  	@GetMapping("loginpage")
+  	public String loginPage() {
+  		return "/student/login-page.html";
+  	}
+  	@GetMapping("registerpage")
+  	public String registerPage() {
+  		return "/student/register-page.html";
+  	}
+  	@GetMapping("readstudentspage")
+  	public String readStudentsPage() {
+  		return "/student/readstudents-page.html";
+  	}
+  	@GetMapping("createstudentpage")
+  	public String createStudentPage() {
+  		return "/student/createstudent-page.html";
+  	}
+  }
+
+Update home-page.html with bootstrap navigation bar with links.
+  <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <title>MCE Students</title>
+    <link
+    	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    	rel="stylesheet"
+    	integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    	crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    </head>
+    <body>
+    	<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    		<ul class="navbar-nav me-auto">
+    			<li class="nav-item"><a href="/student/ui/homepage" class="nav-link">Home</a></li>
+    			<li class="nav-item"><a href="/student/ui/readstudentspage" class="nav-link">Read Students</a></li>
+    			<li class="nav-item"><a href="/student/ui/createstudentpage" class="nav-link">Create Student</a></li>
+    		</ul>
+    		<ul class="navbar-nav ms-auto">
+    			<li class="nav-item"><a href="/student/ui/loginpage" class="nav-link">Login</a></li>
+    			<li class="nav-item"><a href="/student/ui/registerpage" class="nav-link">Register</a></li>
+    			<li class="nav-item"><a href="/student/ui/aboutuspage" class="nav-link">About Us</a></li>
+    			<li class="nav-item"><a href="/student/ui/contactuspage" class="nav-link">Contact Us</a></li>
+    		</ul>
+    	</nav>
+    
+    	<div class="container">
+    		<h1 class="text-center">Welcome to MCE</h1>
+    	</div>
+    	<footer class="footer">
+    		<div class="container">
+    			<span>All Rights Reserved 2025 John Philip</span>
+    		</div>
+    	</footer>
+    </body>
+  </html>
+
+Create aboutus-page.html, contactus-page.html, createstudent-page.html, login-page.html, readstudent-page.html, readstudents-page.html, register-page.html files under templates folder.
+Copy the content from home-page.html and paste in all other html files. Modify the div tag content.
+
+
+
+
