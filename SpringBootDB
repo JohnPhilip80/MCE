@@ -315,8 +315,8 @@ public class StudentController {
 	private StudentService service;
 	
 	@GetMapping("/readstudents")
-	public List<Student> readBooks() {
-		return service.readBooks();
+	public List<Student> readStudents() {
+		return service.readStudents();
 	}
 	@PostMapping("/createstudent")
 	public String createStudent(@RequestBody Student st) {
