@@ -48,7 +48,7 @@ Paste in home-page.html
   </html>
 
 Run and test in browser.
-
+Copy mce logo jpg file in src/main/resources/static folder.
 Include our own style
 Create styles.css file under src/main/resources/static folder
   .footer{
