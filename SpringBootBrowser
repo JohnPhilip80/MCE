@@ -71,6 +71,9 @@ Include styles.css in home-page.html
     </head>
     <div class="container">
 		  <h1 class="text-center">Welcome to MCE</h1>
+			<div class="text-center">
+			<img  th:src="@{/mce_logo.jpg}" alt="mce">
+		</div>
 	  </div>
     	<footer class="footer">
     		<div class="container">
