@@ -334,7 +334,7 @@ public class StudentController {
 		return "Student Deleted Successfully";
 	}
 	@GetMapping("/readstudent")
-	public Student readBook(@RequestParam Long id) {
+	public Student readStudent(@RequestParam Long id) {
 		return service.getStudentByStudentId(id);
 	}
 }
