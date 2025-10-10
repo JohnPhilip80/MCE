@@ -1,0 +1,829 @@
+Student.java
+  package edu.mce.john.security.entities;
+  
+  import jakarta.persistence.Column;
+  import jakarta.persistence.Entity;
+  import jakarta.persistence.GeneratedValue;
+  import jakarta.persistence.GenerationType;
+  import jakarta.persistence.Id;
+  import jakarta.persistence.Table;
+  
+  @Entity
+  @Table(name="student")
+  public class Student {
+  	@Id
+  	@GeneratedValue(strategy=GenerationType.IDENTITY)
+  	@Column(name="student_id")
+  	private Long studentId;
+  	
+  	@Column(name="student_name", length=60)
+  	private String studentName;
+  	
+  	@Column(name="student_email", length=70)
+  	private String studentEmail;
+  	
+  	@Column(name="student_phone")
+  	private Long studentPhone;
+  	
+  	@Column(name="student_course",length=10)
+  	private String studentCourse;
+  	
+  	@Column(name="student_cgpa")
+  	private Double studentCGPA;
+  
+  	public Student(Long studentId, String studentName, String studentEmail, Long studentPhone, String studentCourse,
+  			Double studentCGPA) {
+  		super();
+  		this.studentId = studentId;
+  		this.studentName = studentName;
+  		this.studentEmail = studentEmail;
+  		this.studentPhone = studentPhone;
+  		this.studentCourse = studentCourse;
+  		this.studentCGPA = studentCGPA;
+  	}
+  
+  	public Student(String studentName, String studentEmail, Long studentPhone, String studentCourse,
+  			Double studentCGPA) {
+  		super();
+  		this.studentName = studentName;
+  		this.studentEmail = studentEmail;
+  		this.studentPhone = studentPhone;
+  		this.studentCourse = studentCourse;
+  		this.studentCGPA = studentCGPA;
+  	}
+  
+  	public Student() {
+  		super();
+  		// TODO Auto-generated constructor stub
+  	}
+  
+  	public Long getStudentId() {
+  		return studentId;
+  	}
+  
+  	public void setStudentId(Long studentId) {
+  		this.studentId = studentId;
+  	}
+  
+  	public String getStudentName() {
+  		return studentName;
+  	}
+  
+  	public void setStudentName(String studentName) {
+  		this.studentName = studentName;
+  	}
+  
+  	public String getStudentEmail() {
+  		return studentEmail;
+  	}
+  
+  	public void setStudentEmail(String studentEmail) {
+  		this.studentEmail = studentEmail;
+  	}
+  
+  	public Long getStudentPhone() {
+  		return studentPhone;
+  	}
+  
+  	public void setStudentPhone(Long studentPhone) {
+  		this.studentPhone = studentPhone;
+  	}
+  
+  	public String getStudentCourse() {
+  		return studentCourse;
+  	}
+  
+  	public void setStudentCourse(String studentCourse) {
+  		this.studentCourse = studentCourse;
+  	}
+  
+  	public Double getStudentCGPA() {
+  		return studentCGPA;
+  	}
+  
+  	public void setStudentCGPA(Double studentCGPA) {
+  		this.studentCGPA = studentCGPA;
+  	}
+  }
+
+
+User.java
+  package edu.mce.john.security.entities;
+  
+  import jakarta.persistence.Entity;
+  import jakarta.persistence.GeneratedValue;
+  import jakarta.persistence.GenerationType;
+  import jakarta.persistence.Id;
+  import jakarta.persistence.Table;
+  
+  @Entity
+  @Table(name = "users")
+  public class User {
+      @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+      private Long id;
+  
+      private String name;
+      private String email;
+      private String password;
+  
+      // Getters and setters
+  
+      public Long getId() {
+          return id;
+      }
+  
+      public void setId(Long id) {
+          this.id = id;
+      }
+  
+      public String getName() {
+          return name;
+      }
+  
+      public void setName(String name) {
+          this.name = name;
+      }
+  
+      public String getEmail() {
+          return email;
+      }
+  
+      public void setEmail(String email) {
+          this.email = email;
+      }
+  
+      public String getPassword() {
+          return password;
+      }
+  
+      public void setPassword(String password) {
+          this.password = password;
+      }
+  }
+
+StudentRepository.java
+  package edu.mce.john.security.repositories;
+
+  import org.springframework.data.jpa.repository.JpaRepository;
+  import org.springframework.stereotype.Repository;  
+  import edu.mce.john.security.entities.Student;
+  
+  @Repository
+  public interface StudentRepository extends JpaRepository<Student,Long> {
+  	Student getStudentByStudentId(Long id);
+  }
+
+UserRepository.java
+  package edu.mce.john.security.repositories;
+  
+  import org.springframework.data.jpa.repository.JpaRepository;
+  import org.springframework.stereotype.Repository;
+  
+  import edu.mce.john.security.entities.User;
+  
+  @Repository
+  public interface UserRepository extends JpaRepository<User, Long> {
+      User findByEmail(String email);
+  }
+
+StudentService.java
+  package edu.mce.john.security.services;
+  
+  import java.util.List;
+  
+  import org.springframework.beans.factory.annotation.Autowired;
+  import org.springframework.stereotype.Service;
+  
+  import edu.mce.john.security.entities.Student;
+  import edu.mce.john.security.repositories.StudentRepository;
+  
+  @Service
+  public class StudentService {
+  	@Autowired
+  	private StudentRepository repo;
+  	
+  	public List<Student> readStudents(){
+  		return repo.findAll();
+  	}
+  	public void createStudent(Student st) {
+  		repo.save(st);
+  	}
+  	public void updateStudent(Student st) {
+  		repo.save(st);
+  	}
+  	public void deleteStudent(Long id) {
+  		repo.deleteById(id);
+  	}
+  	public Student getStudentByStudentId(Long id) {
+  		return repo.getStudentByStudentId(id);
+  	}
+  }
+
+UserService.java
+  package edu.mce.john.security.services;
+
+  import org.springframework.beans.factory.annotation.Autowired;
+  import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+  import org.springframework.stereotype.Service;
+  
+  import edu.mce.john.security.entities.User;
+  import edu.mce.john.security.repositories.UserRepository;
+  
+  @Service
+  public class UserService {
+      @Autowired
+      private UserRepository userRepository;
+  
+      private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+  
+      public void save(User user) {
+          user.setPassword(encoder.encode(user.getPassword()));
+          userRepository.save(user);
+      }
+  
+      public User findByEmail(String email) {
+          return userRepository.findByEmail(email);
+      }
+  }
+
+StudentDto.java
+  package edu.mce.john.security.dto;
+  
+  public class StudentDto {
+  	private Long studentId;
+  	private String studentName;
+  	private String studentEmail;
+  	private Long studentPhone;
+  	private String studentCourse;
+  	private Double studentCGPA;
+  	public StudentDto(Long studentId, String studentName, String studentEmail, Long studentPhone, String studentCourse,
+  			Double studentCGPA) {
+  		super();
+  		this.studentId = studentId;
+  		this.studentName = studentName;
+  		this.studentEmail = studentEmail;
+  		this.studentPhone = studentPhone;
+  		this.studentCourse = studentCourse;
+  		this.studentCGPA = studentCGPA;
+  	}
+  	public StudentDto(String studentName, String studentEmail, Long studentPhone, String studentCourse,
+  			Double studentCGPA) {
+  		super();
+  		this.studentName = studentName;
+  		this.studentEmail = studentEmail;
+  		this.studentPhone = studentPhone;
+  		this.studentCourse = studentCourse;
+  		this.studentCGPA = studentCGPA;
+  	}
+  	public StudentDto() {
+  		super();
+  		// TODO Auto-generated constructor stub
+  	}
+  	public Long getStudentId() {
+  		return studentId;
+  	}
+  	public void setStudentId(Long studentId) {
+  		this.studentId = studentId;
+  	}
+  	public String getStudentName() {
+  		return studentName;
+  	}
+  	public void setStudentName(String studentName) {
+  		this.studentName = studentName;
+  	}
+  	public String getStudentEmail() {
+  		return studentEmail;
+  	}
+  	public void setStudentEmail(String studentEmail) {
+  		this.studentEmail = studentEmail;
+  	}
+  	public Long getStudentPhone() {
+  		return studentPhone;
+  	}
+  	public void setStudentPhone(Long studentPhone) {
+  		this.studentPhone = studentPhone;
+  	}
+  	public String getStudentCourse() {
+  		return studentCourse;
+  	}
+  	public void setStudentCourse(String studentCourse) {
+  		this.studentCourse = studentCourse;
+  	}
+  	public Double getStudentCGPA() {
+  		return studentCGPA;
+  	}
+  	public void setStudentCGPA(Double studentCGPA) {
+  		this.studentCGPA = studentCGPA;
+  	}
+  }
+
+AuthController.java
+  package edu.mce.john.security.controllers;
+
+import edu.mce.john.security.entities.User;
+import edu.mce.john.security.services.UserService;
+import edu.mce.john.security.dto.StudentDto;
+import edu.mce.john.security.entities.Student;
+import edu.mce.john.security.services.StudentService;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+public class AuthController {
+  
+      @Autowired
+      private UserService userService;
+  	@Autowired
+  	private StudentService service;
+  
+  
+      @GetMapping("/login")
+      public String loginPage() {
+          return "student/login-page.html";
+      }
+      
+      @GetMapping("/register")
+      public String registerForm(Model model) {
+          model.addAttribute("user", new User());
+          return "student/register-page.html";
+      }
+  
+      @PostMapping("/register")
+      public String registerUser(@ModelAttribute User user) {
+          userService.save(user);
+          return "redirect:/login";
+      }
+  
+      @GetMapping("/home")
+      public String homePage(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+          User user = userService.findByEmail(userDetails.getUsername());
+          model.addAttribute("name", user.getName());
+          model.addAttribute("email", user.getEmail());
+          return "student/home-page.html";
+      }
+      
+      @GetMapping("/aboutus")
+      public String aboutUs(@AuthenticationPrincipal UserDetails userDetails) {
+          return "student/aboutus-page.html";
+      }
+      
+      @GetMapping("/contactus")
+      public String contactUs(@AuthenticationPrincipal UserDetails userDetails) {
+          return "student/contactus-page.html";
+      }
+  
+      
+      @GetMapping("/readstudents")
+      public String readStudents(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+          User user = userService.findByEmail(userDetails.getUsername());
+          model.addAttribute("name", user.getName());
+          model.addAttribute("email", user.getEmail());
+          
+          List<Student> students = service.readStudents();
+  		model.addAttribute("students",students);
+  		return "/student/readstudents-page.html";
+      }
+      
+      @GetMapping("createstudent")
+  	public String createStudent(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+  		StudentDto studentDto = new StudentDto();
+  		model.addAttribute("studentDto",studentDto);
+  		return "/student/createstudent-page.html";
+  	}
+  	@PostMapping("createstudent")
+  	public String createStudentPage(@ModelAttribute StudentDto studentDto) {
+  		Student st = new Student(studentDto.getStudentName(),studentDto.getStudentEmail(),studentDto.getStudentPhone(),studentDto.getStudentCourse(),studentDto.getStudentCGPA());
+  		service.createStudent(st);
+  		return "redirect:/readstudents";
+  	}
+  	@GetMapping("updatestudent")
+  	public String updateStudent(@AuthenticationPrincipal UserDetails userDetails, Model model, @RequestParam Long id) {
+  		Student st = service.getStudentByStudentId(id);
+  		StudentDto studentDto = new StudentDto(st.getStudentName(),st.getStudentEmail(),st.getStudentPhone(),st.getStudentCourse(),st.getStudentCGPA());
+  		model.addAttribute("studentDto",studentDto);
+  		return "/student/updatestudent-page.html";
+  	}
+  	@PostMapping("updatestudent")
+  	public String updateStudent(@RequestParam Long id, @ModelAttribute StudentDto studentDto) {
+  		Student st = service.getStudentByStudentId(id);
+  		st.setStudentName(studentDto.getStudentName());
+  		st.setStudentEmail(studentDto.getStudentEmail());
+  		st.setStudentPhone(studentDto.getStudentPhone());
+  		st.setStudentCourse(studentDto.getStudentCourse());
+  		st.setStudentCGPA(studentDto.getStudentCGPA());
+  		service.updateStudent(st);
+  		return "redirect:/readstudents";
+  	}
+  	@GetMapping("deletestudent")
+  	public String deleteStudent(@RequestParam Long id) {
+  		service.deleteStudent(id);
+  		return "redirect:/readstudents";
+  	}
+  	@GetMapping("readstudent")
+  	public String readStudent(@AuthenticationPrincipal UserDetails userDetails, Model model, @RequestParam Long id) {
+  		Student st = service.getStudentByStudentId(id);
+  		StudentDto studentDto = new StudentDto(st.getStudentName(),st.getStudentEmail(),st.getStudentPhone(),st.getStudentCourse(),st.getStudentCGPA());
+  		model.addAttribute("studentDto",studentDto);
+  		return "/student/readstudent-page.html";
+  	}
+  }
+
+SecurityConfig.java
+  package edu.mce.john.security.configurations;
+  
+  import edu.mce.john.security.services.UserService;
+  import org.springframework.context.annotation.Bean;
+  import org.springframework.context.annotation.Configuration;
+  import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+  import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+  import org.springframework.security.core.userdetails.*;
+  import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+  import org.springframework.security.web.SecurityFilterChain;
+  
+  @Configuration
+  public class SecurityConfig {
+  
+      @Bean
+      public UserDetailsService userDetailsService(UserService userService) {
+          return email -> {
+              var user = userService.findByEmail(email);
+              if (user == null) throw new UsernameNotFoundException("User not found");
+              return User.builder()
+                      .username(user.getEmail())
+                      .password(user.getPassword())
+                      .roles("USER")
+                      .build();
+          };
+      }
+  
+      @Bean
+      public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+          http.csrf().disable()
+              .authorizeHttpRequests(auth -> auth
+                  .requestMatchers("/register", "/css/**", "/js/**").permitAll()
+                  .anyRequest().authenticated())
+              .formLogin(form -> form
+                  .loginPage("/login").permitAll()
+                  .defaultSuccessUrl("/home", true))
+              .logout(logout -> logout.permitAll());
+          return http.build();
+      }
+  
+      @Bean
+      public BCryptPasswordEncoder passwordEncoder() {
+          return new BCryptPasswordEncoder();
+      }
+  }
+
+SecurityApplication.java
+  package edu.mce.john.security;
+  
+  import org.springframework.boot.SpringApplication;
+  import org.springframework.boot.autoconfigure.SpringBootApplication;
+  
+  @SpringBootApplication
+  public class SecurityApplication {
+  
+  	public static void main(String[] args) {
+  		SpringApplication.run(SecurityApplication.class, args);
+  	}
+  
+  }
+
+
+src/main/resources/static/css/styles.css
+  .footer{
+      position: absolute;
+      bottom:0;
+      width:100%;
+      height:40px;
+      background-color: blue;
+      text-align: center;
+      color:white;
+  }
+
+src/main/resources/static/images/mce_logo.jpg
+
+src/main/resources/templates/student/aboutus-page.html
+  <html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+  <title>MCE Students</title>
+  <link
+  	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+  	rel="stylesheet"
+  	integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+  	crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  </head>
+  <body>
+  		<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  		<ul class="navbar-nav me-auto">
+  			<li class="nav-item"><a href="/home" class="nav-link">Home</a></li>
+  			<li class="nav-item"><a href="/readstudents" class="nav-link">Read Students</a></li>
+  			<li class="nav-item"><a href="/createstudent" class="nav-link">Create Student</a></li>
+  		</ul>
+  		<ul class="navbar-nav ms-auto">
+  			<li class="nav-item"><a href="/aboutus" class="nav-link">About Us</a></li>
+  			<li class="nav-item"><a href="/contactus" class="nav-link">Contact Us</a></li>
+  			<form th:action="@{/logout}" method="post"><button type="submit" class="btn btn-danger">Logout</button></form>
+  		</ul>
+  	</nav>
+  
+  	<div class="container">
+  		<h1 class="text-center">About Us...</h1>
+  	</div>
+  	<footer class="footer">
+  		<div class="container">
+  			<span>All Rights Reserved 2025 John Philip</span>
+  		</div>
+  	</footer>
+  </body>
+  </html>
+src/main/resources/templates/student/contactus-page.html
+  <div class="container">
+		<h1 class="text-center">Contact Us..</h1>
+	</div>
+src/main/resources/templates/student/createstudent-page.html
+  	<h1 class="text-center">Create Student</h1>
+  	<div class="col-md-8 offset-md-3">
+  		
+  		<form method="post" th:object="${studentDto}">
+  	        <div class="form-group">
+  	            <label for="title">Name</label>
+  	            <input type = "text" th:field="${studentDto.studentName}" class="form-control" id="name" name="name">
+  	        </div>
+  	        <div class="form-group">
+  	            <label for="email">Email</label>
+  	            <input type = "text" th:field="${studentDto.studentEmail}" class="form-control" id="email" name="email">
+  	        </div>
+  	        <div class="form-group">
+  	            <label for="phone">Phone</label>
+  	            <input type = "text" th:field="${studentDto.studentPhone}" class="form-control" id="phone" name="phone">
+  	        </div>
+  	        <div class="form-group">
+  	            <label for="course">Course</label>
+  	            <input type = "text" th:field="${studentDto.studentCourse}" class="form-control" id="course" name="course">
+  	        </div>
+  	        <div class="form-group">
+  	            <label for="cgpa">CGPA</label>
+  	            <input type = "text" th:field="${studentDto.studentCGPA}" class="form-control" id="cgpa" name="cgpa">
+  	        </div>
+  	        <button class="btn btn-success" type="submit">Submit</button>
+  	    </form>
+  	</div>
+
+src/main/resources/templates/student/home-page.html
+  <div class="container">
+		
+		<h1 class="text-center">Welcome to MCE</h1>
+		<p><strong>Name:</strong> <span th:text="${name}"></span></p>
+    	<p><strong>Email:</strong> <span th:text="${email}"></span></p>
+		<div class="text-center">
+			<img  th:src="@{/images/mce_logo.jpg}" alt="mce">
+		</div>
+	</div>
+
+src/main/resources/templates/student/login-page.html
+  	<div class="container">
+    	<h1>Login</h1>
+    	<form method="post" th:action="@{/login}">
+        	<div class="mb-3">
+            	<label>Email:</label>
+            	<input type="text" name="username" class="form-control"/>
+        	</div>
+        	<div class="mb-3">
+            	<label>Password:</label>
+            	<input type="password" name="password" class="form-control"/>
+        	</div>
+        	<button type="submit" class="btn btn-primary">Login</button>
+        	<a th:href="@{/register}" class="btn btn-link">Register</a>
+    	</form>
+    </div>
+
+src/main/resources/templates/student/readstudent-page.html
+  	<h1 class="text-center">Student Detail</h1>
+  	<div class="col-md-8 offset-md-3">
+  	    <div class="form-group">
+  	            <label for="title">Name</label>
+  	            <input disable type = "text" th:field="${studentDto.studentName}" class="form-control" id="name" name="name">
+  	     </div>
+  	        <div class="form-group">
+  	            <label for="email">Email</label>
+  	            <input disable type = "text" th:field="${studentDto.studentEmail}" class="form-control" id="email" name="email">
+  	        </div>
+  	        <div class="form-group">
+  	            <label for="phone">Phone</label>
+  	            <input disable type = "text" th:field="${studentDto.studentPhone}" class="form-control" id="phone" name="phone">
+  	        </div>
+  	        <div class="form-group">
+  	            <label for="course">Course</label>
+  	            <input disable type = "text" th:field="${studentDto.studentCourse}" class="form-control" id="course" name="course">
+  	        </div>
+  	        <div class="form-group">
+  	            <label for="cgpa">CGPA</label>
+  	            <input disable type = "text" th:field="${studentDto.studentCGPA}" class="form-control" id="cgpa" name="cgpa">
+  	        </div>
+  	</div>
+
+src/main/resources/templates/student/readstudents-page.html
+  	<div class="container">
+  		<h1 class="text-center">Student List</h1>
+  		<table class = "table table-striped">
+  		    <thead>
+  		        <tr>
+  		        	<th> Id</th>
+  		            <th> Name</th>
+  		            <th> Email </th>
+  		            <th> Phone </th>
+  		            <th> Course </th>
+  		            <th> CGPA </th>
+  		            <th> Actions </th>
+  		        </tr>
+  		    </thead>
+  		    <tbody>
+  		        <tr th:each="st:${students}">
+  					<td th:text="${st.studentId}"></td>
+  					<td th:text="${st.studentName}"></td>
+  					<td th:text="${st.studentEmail}"></td>
+  					<td th:text="${st.studentPhone}"></td>
+  					<td th:text="${st.studentCourse}"></td>
+  					<td th:text="${st.studentCGPA}"></td>
+  					<td>
+  						<a th:href="@{/updatestudent(id=${st.studentId})}" class = "btn btn-info">Update</a>
+  						<a th:href="@{/deletestudent(id=${st.studentId})}" class = "btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+  						<a th:href="@{/readstudent(id=${st.studentId})}" class = "btn btn-info">View</a>
+  					</td>
+  				</tr>
+  		    </tbody>
+  		</table>
+  				
+  	</div>
+
+src/main/resources/templates/student/register-page.html
+  	<div class="container">
+    	<h1>Register</h1>
+    	<form th:action="@{/register}" th:object="${user}" method="post">
+        	<div class="mb-3">
+            	<label>Name:</label>
+            	<input type="text" th:field="*{name}" class="form-control"/>
+        	</div>
+	        <div class="mb-3">
+	            <label>Email:</label>
+	            <input type="email" th:field="*{email}" class="form-control"/>
+	        </div>
+	        <div class="mb-3">
+	            <label>Password:</label>
+	            <input type="password" th:field="*{password}" class="form-control"/>
+	        </div>
+	        <button type="submit" class="btn btn-success">Register</button>
+	    </form>
+	 </div>
+
+src/main/resources/templates/student/updatestudent-page.html
+  <h1 class="text-center">Update Student</h1>
+	<div class="col-md-8 offset-md-3">
+		
+		<form method="post" th:object="${studentDto}">
+	        <div class="form-group">
+	            <label for="title">Name</label>
+	            <input type = "text" th:field="${studentDto.studentName}" class="form-control" id="name" name="name">
+	        </div>
+	        <div class="form-group">
+	            <label for="email">Email</label>
+	            <input type = "text" th:field="${studentDto.studentEmail}" class="form-control" id="email" name="email">
+	        </div>
+	        <div class="form-group">
+	            <label for="phone">Phone</label>
+	            <input type = "text" th:field="${studentDto.studentPhone}" class="form-control" id="phone" name="phone">
+	        </div>
+	        <div class="form-group">
+	            <label for="course">Course</label>
+	            <input type = "text" th:field="${studentDto.studentCourse}" class="form-control" id="course" name="course">
+	        </div>
+	        <div class="form-group">
+	            <label for="cgpa">CGPA</label>
+	            <input type = "text" th:field="${studentDto.studentCGPA}" class="form-control" id="cgpa" name="cgpa">
+	        </div>
+	        <button class="btn btn-success" type="submit">Submit</button>
+	    </form>
+	</div>
+
+src/main/resources/application.properties
+  ##
+  server.port = 8080
+  # ## In memory store: not persistent
+  # spring.datasource.url=jdbc:h2:mem:app_db;DB_CLOSE_ON_EXIT=FALSE
+  
+  # ## Local db filestore: in your home folder
+  # spring.datasource.url=jdbc:h2:file:~/h2db/h2_db_example/app_db;DB_CLOSE_ON_EXIT=FALSE
+  
+  # ## Local db filestore: in base directory in folder "data"
+  spring.datasource.url=jdbc:h2:file:./data/app_db1;DB_CLOSE_ON_EXIT=FALSE
+  
+  # h2 defaults:
+  spring.datasource.username=sa
+  spring.datasource.password=pass
+  
+  spring.datasource.driverClassName=org.h2.Driver
+  
+  # Use "create" or "create-drop" when you wish to recreate database on restart; use 
+  # "update" or "validate" when data is to be kept.
+  spring.jpa.hibernate.ddl-auto=update
+  
+  # 
+  spring.jpa.show-sql=true
+  spring.jpa.properties.hibernate.format_sql=true
+  
+  spring.h2.console.enabled=true
+  spring.h2.console.path=/h2-console
+
+
+
+pom.xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+  	<parent>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-parent</artifactId>
+  		<version>3.5.6</version>
+  		<relativePath/> <!-- lookup parent from repository -->
+  	</parent>
+  	<groupId>edu.mce.john</groupId>
+  	<artifactId>security</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<name>security</name>
+  	<description>Demo project for Spring Boot</description>
+  	<url/>
+  	<licenses>
+  		<license/>
+  	</licenses>
+  	<developers>
+  		<developer/>
+  	</developers>
+  	<scm>
+  		<connection/>
+  		<developerConnection/>
+  		<tag/>
+  		<url/>
+  	</scm>
+  	<properties>
+  		<java.version>17</java.version>
+  	</properties>
+  	<dependencies>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-data-jpa</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-security</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-web</artifactId>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.thymeleaf.extras</groupId>
+  			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+  		</dependency>
+  
+  		<dependency>
+  			<groupId>com.h2database</groupId>
+  			<artifactId>h2</artifactId>
+  			<scope>runtime</scope>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-starter-test</artifactId>
+  			<scope>test</scope>
+  		</dependency>
+  		<dependency>
+  			<groupId>org.springframework.security</groupId>
+  			<artifactId>spring-security-test</artifactId>
+  			<scope>test</scope>
+  		</dependency>
+  	</dependencies>
+  
+  	<build>
+  		<plugins>
+  			<plugin>
+  				<groupId>org.springframework.boot</groupId>
+  				<artifactId>spring-boot-maven-plugin</artifactId>
+  			</plugin>
+  		</plugins>
+  	</build>
+  
+  </project>
